@@ -2,8 +2,9 @@ services:
   - type: web
     name: hrms-backend
     env: python
-    buildCommand: pip install -r backend/requirements.txt
-    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    workingDirectory: /backend  # YEH ADD KARO
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: MONGO_URL
         sync: false
