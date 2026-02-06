@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Production backend URL (Render)
-const RENDER_BACKEND_URL = 'https://hrms-lite-2-yb7g.onrender.com/';
+const RENDER_BACKEND_URL = 'https://hrms-lite-2-yb7g.onrender.com';
 
 // Development backend URL
 const LOCAL_BACKEND_URL = 'http://localhost:8000';
