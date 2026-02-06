@@ -10,10 +10,17 @@ app = FastAPI(
     version="1.0.0"
 )
 
+origins = [
+    "http://localhost:3000",  # Local development
+    "https://ornate-malasada-aa0482.netlify.app/",  # Your Netlify URL
+    # Agar multiple subdomains ho to:
+    "https://*.netlify.app",  # All Netlify apps
+]
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    # allow_origins=["http://localhost:3000"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
@@ -86,4 +93,5 @@ async def root():
             "employees": "/api/employees",
             "attendance": "/api/attendance"
         }
+
     }
