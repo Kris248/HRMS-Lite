@@ -19,13 +19,14 @@ origins = [
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    # allow_origins=["http://localhost:3000"],
-    allow_origins=origins,
+    allow_origins=["*"],  # Allow ALL origins temporarily
     allow_credentials=True,
+    allow_methods=["*"],
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
     expose_headers=["*"],
     max_age=600,  # Cache preflight requests for 10 minutes
+    
 )
 # Store database connection status
 db_connected = False
@@ -95,3 +96,4 @@ async def root():
         }
 
     }
+
