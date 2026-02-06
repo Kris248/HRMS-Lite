@@ -12,7 +12,7 @@ app = FastAPI(
 
 origins = [
     "http://localhost:3000",  # Local development
-    "https://ornate-malasada-aa0482.netlify.app/",  # Your Netlify URL
+    "https://ornate-malasada-aa0482.netlify.app",  # Your Netlify URL
     # Agar multiple subdomains ho to:
     "https://*.netlify.app",  # All Netlify apps
 ]
@@ -96,4 +96,5 @@ async def root():
         }
 
     }
+
 
