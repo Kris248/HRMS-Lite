@@ -11,17 +11,32 @@ function App() {
   const [backendStatus, setBackendStatus] = useState(null);
   const [currentBackendURL, setCurrentBackendURL] = useState('');
 
-  useEffect(() => {
-    const checkBackend = async () => {
-      console.log('🔍 Checking backend connection...');
-      const status = await testBackendConnection();
-      setBackendStatus(status);
-      setCurrentBackendURL(status.backendURL || '');
-    };
+  // useEffect(() => {
+  //   const checkBackend = async () => {
+  //     console.log('🔍 Checking backend connection...');
+  //     const status = await testBackendConnection();
+  //     setBackendStatus(status);
+  //     setCurrentBackendURL(status.backendURL || '');
+  //   };
     
-    checkBackend();
-  }, []);
+  //   checkBackend();
+  // }, []);
 
+  useEffect(() => {
+  console.log('🔍 Checking backend connection...');
+  
+  // Direct fetch to test
+  fetch('https://hrms-lite-2-yb7g.onrender.com/health')
+    .then(response => response.json())
+    .then(data => {
+      console.log('✅ Backend is UP:', data);
+      setBackendStatus({ success: true, data });
+    })
+    .catch(error => {
+      console.error('❌ Backend is DOWN:', error);
+      setBackendStatus({ success: false, error: error.message });
+    });
+}, []);
   return (
     <Router>
       <Navbar />
