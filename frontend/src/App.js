@@ -1,19 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Container, CssBaseline, Alert } from '@mui/material';
+import { Container, Alert } from '@mui/material';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import Employees from './pages/Employees';
 import Attendance from './pages/Attendance';
-import { testConnection } from './services/api';
+import { testBackendConnection } from './services/api';
 
 function App() {
-  const [backendStatus, setBackendStatus] = React.useState(null);
+  const [backendStatus, setBackendStatus] = useState(null);
+  const [currentBackendURL, setCurrentBackendURL] = useState('');
 
   useEffect(() => {
     const checkBackend = async () => {
-      const status = await testConnection();
+      console.log('🔍 Checking backend connection...');
+      const status = await testBackendConnection();
       setBackendStatus(status);
+      setCurrentBackendURL(status.backendURL || '');
     };
     
     checkBackend();
@@ -21,10 +24,10 @@ function App() {
 
   return (
     <Router>
-      <CssBaseline />
       <Navbar />
       
-      {backendStatus && backendStatus.status === 'error' && (
+      {/* Backend Status Alert */}
+      {backendStatus && !backendStatus.success && (
         <Alert 
           severity="warning" 
           sx={{ 
@@ -33,7 +36,10 @@ function App() {
             mb: -2 
           }}
         >
-          ⚠️ Backend connection failed. Please ensure backend server is running on port 8000.
+          ⚠️ Backend connection failed. 
+          {currentBackendURL && ` Trying to connect to: ${currentBackendURL}`}
+          <br />
+          Please ensure backend is running on Render.
         </Alert>
       )}
       
