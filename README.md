@@ -1,5 +1,7 @@
 # HRMS Lite - Simple HR Management System
 
+## Preview- https://ornate-malasada-aa0482.netlify.app/
+
 A lightweight HR Management System built with React, FastAPI, and MongoDB. This project allows admins to manage employee records and track daily attendance.
 
 ## 🚀 Features
